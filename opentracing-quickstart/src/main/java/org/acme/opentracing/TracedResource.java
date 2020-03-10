@@ -1,7 +1,5 @@
 package org.acme.opentracing;
 
-import java.net.URI;
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,9 +8,13 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/")
 public class TracedResource {
+
+    private static final Logger LOG = LoggerFactory.getLogger(TracedResource.class);
 
     @Inject
     private FrancophoneService exampleBean;
@@ -24,6 +26,7 @@ public class TracedResource {
     @Path("/hello")
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
+        LOG.info("hello");
         return "hello";
     }
 
